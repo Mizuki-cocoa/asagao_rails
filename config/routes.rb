@@ -4,8 +4,4 @@ Rails.application.routes.draw do
     1.upto(19) do |n|
         get "lesson/step#{n}(/:name)" => "lesson#step#{n}"
     end
-
-    resources :members do
-        get "search", on: :collection
-    end
 end
