@@ -32,11 +32,21 @@
       <th><%= form.label :email, "メールアドレス" %></th>
       <td><%= form.text_field :email %></td>
     </tr>
+
+    <% if @member.new_record? %>
+      <tr>
+        <th><%= form.label :password, "パスワード" %></th>
+        <td><%= form.text_field :password %></td>
+      </tr>
+    <% end %>
+
+    <% if controller.kind_of?(MembersController) %>
     <tr>
-      <th>管理者</th>
+      <th><%= Member.human_attribute_name(:administrator) %></th>
       <td>
         <%= form.check_box :administrator %>
-        <%= form.label :administrator, "管理者" %>
+        <%= form.label :administrator , "管理者" %>
       </td>
     </tr>
+  <% end %>
   </table>
