@@ -2,12 +2,12 @@ class MembersController < ApplicationController
   before_action :login_required
   # 会員一覧
   def index
-    @members = Member.order("number")
+    @members = Member.order("number").page(params[:page]).per(15)
   end
 
   # 検索
   def search
-    @members = Member.search(params[:q],params[:man],params[:lady])
+    @members = Member.search(params[:q],params[:man],params[:lady]).page(params[:page]).per(15)
     render "index"#index.html.erbでの参照
     
   end

@@ -34,6 +34,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'email_validator', '~> 1.6'
 
+gem 'kaminari'
+gem 'kaminari-i18n'
 
 gem 'date_validator', '~>0.10.0'
 
