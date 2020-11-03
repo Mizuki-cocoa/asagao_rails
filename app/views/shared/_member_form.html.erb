@@ -48,5 +48,14 @@
         <%= form.label :administrator , "管理者" %>
       </td>
     </tr>
+
+    <tr>
+      <th><%= form.label :number, "役職" %></th>
+      <td>
+        <% Duty.all.each do |duty| %>
+          <%= form.check_box :duty_ids, { multiple: true }, duty.id, nil %><%= duty.name %>&emsp;
+        <% end %>
+      </td>
+    </tr>
   <% end %>
   </table>

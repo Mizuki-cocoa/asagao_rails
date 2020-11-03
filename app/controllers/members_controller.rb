@@ -9,7 +9,6 @@ class MembersController < ApplicationController
   def search
     @members = Member.search(params[:q],params[:man],params[:lady]).page(params[:page]).per(15)
     render "index"#index.html.erbでの参照
-    
   end
 
   # 会員情報の詳細

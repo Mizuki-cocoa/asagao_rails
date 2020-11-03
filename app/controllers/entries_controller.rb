@@ -3,7 +3,7 @@ class EntriesController < ApplicationController
 
   # 記事一覧
   def index
-    if params[:member_id]
+    if [:member_id]
       @member = Member.find(params[:member_id])
       @entries = @member.entries
     else

@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     private def update_expiration_time
         member=current_member
         if member#値があれば
-            cookies.signed[:member_id]={value: member.id , expires: 10.seconds.from_now}
+            cookies.signed[:member_id]={value: member.id , expires: 1.minutes.from_now}
         end
     end
 

@@ -1,0 +1,13 @@
+<% @page_title = "役職一覧" %>
+<h1><%= @page_title %></h1>
+
+<table class="list">
+    <% @duties.each do |duty| %>
+    <tr>
+        <td><%= duty.name %></td>
+        <td><%= duty.member&.full_name %></td>
+    </tr>
+    <% end %>
+</table>
+
+
