@@ -1,5 +1,7 @@
 class Entry < ApplicationRecord
     belongs_to :author, class_name: "Member", foreign_key: "member_id"
+    has_many :votes, dependent: :destroy
+    has_many :voters, through: :votes, source: :member
     
     STATUS_VALUES = %w(draft member_only public)
     STATUS_VALUES_JA = %w(下書き 会員限定 公開)

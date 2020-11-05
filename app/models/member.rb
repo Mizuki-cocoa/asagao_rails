@@ -2,6 +2,9 @@ class Member < ApplicationRecord
   has_secure_password
   has_many :entries, dependent: :destroy
   has_many :duties
+  has_many :votes, dependent: :destroy
+  has_many :voted_entries , through: :votes, source: :entry
+
   validates :number, presence: true,
     numericality: {
       only_integer: true,
@@ -26,6 +29,10 @@ class Member < ApplicationRecord
 
   attr_accessor :current_password
   validates :password, presence: {if: :current_password}
+
+  def votable_for?(entry)
+    entry && entry.author != self && !votes.exists?(entry_id: entry.id)
+  end
   
   class << self
       def search(query,man,lady)

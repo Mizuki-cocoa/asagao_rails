@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_29_062007) do
+ActiveRecord::Schema.define(version: 2020_11_03_141102) do
 
   create_table "duties", force: :cascade do |t|
     t.integer "member_id"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 2020_10_29_062007) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer "entry_id", null: false
+    t.integer "member_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entry_id"], name: "index_votes_on_entry_id"
+    t.index ["member_id"], name: "index_votes_on_member_id"
   end
 
 end

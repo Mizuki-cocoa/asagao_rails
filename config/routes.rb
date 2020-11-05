@@ -14,7 +14,10 @@ Rails.application.routes.draw do
         resources :entries, only: [:index]
         resources :duties, only: [:index]
     end
-    
+    resources :entries do
+        patch "like", "unlike", on: :member
+        get "voted",on: :collection
+    end
     resource :session, only: [:create, :destroy]
     resource :account, only: [:show, :edit, :update]
     resource :password, only: [:show, :edit, :update]
