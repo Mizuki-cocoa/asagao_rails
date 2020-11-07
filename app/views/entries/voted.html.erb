@@ -7,8 +7,10 @@
     <li>
       <%= link_to entry.title, entry %>
       by <%= link_to entry.author.name, [entry.author, :entries] %>
-      - <%= link_to "削除", [:unlike, entry], method: :patch,
-              data: { confirm: "削除しますか?" } %>
+      <% if @member == current_member %>
+        - <%= link_to "削除", [:unlike, entry], method: :patch,
+                data: { confirm: "削除しますか?" } %>
+      <% end %>
     </li>
     <% end %>
   </ul>
