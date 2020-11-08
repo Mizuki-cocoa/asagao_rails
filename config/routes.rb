@@ -4,18 +4,17 @@ Rails.application.routes.draw do
     get "bad_request" => "top#bad_request"
     get "forbidden" => "top#forbidden"
     get "internal_server_error" => "top#internal_server_error"
-    #get "/entries/voted" => "/entries/1/voted"
 
     1.upto(19) do |n|
         get "lesson/step#{n}(/:name)" => "lesson#step#{n}"
     end
 
-
-    resources :members do
+    resources :members, only: [:index, :show] do
         get "search", on: :collection
         resources :entries, only: [:index]
         resources :duties, only: [:index]
     end
+
     resources :entries do
         patch "like", "unlike", on: :member
         get "voted",on: :collection
@@ -23,8 +22,15 @@ Rails.application.routes.draw do
         member do
             get 'voted'
         end
-
     end
+
+    namespace :admin do
+        root "top#index"
+        resources :members do
+            get "search", on: :collection
+        end
+    end
+
     resource :session, only: [:create, :destroy]
     resource :account, only: [:show, :edit, :update]
     resource :password, only: [:show, :edit, :update]
