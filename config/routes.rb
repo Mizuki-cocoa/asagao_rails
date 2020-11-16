@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     end
 
     resource :session, only: [:create, :destroy]
-    resource :account, only: [:show, :edit, :update]
+    resource :account, only: [:show, :edit, :update, :new, :create]
     resource :password, only: [:show, :edit, :update]
     resources :entries
     resources :duties, only: [:index]
