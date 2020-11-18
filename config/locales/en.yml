@@ -31,6 +31,8 @@
 
 en:
   hello: "Hello world"
+  invalid_image_type: "must be in jpeg, png or gif format."
 errors:
   messages:
     wrong: "is wrong"
+

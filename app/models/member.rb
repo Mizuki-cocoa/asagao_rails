@@ -4,6 +4,9 @@ class Member < ApplicationRecord
   has_many :duties
   has_many :votes, dependent: :destroy
   has_many :voted_entries , through: :votes, source: :entry
+  has_one_attached :profile_picture
+  attribute :new_profile_picture
+  attribute :remove_profile_picture, :boolean
 
   validates :number, presence: true,
     numericality: {
@@ -29,6 +32,24 @@ class Member < ApplicationRecord
 
   attr_accessor :current_password
   validates :password, presence: {if: :current_password}
+
+  before_save do
+    if new_profile_picture
+      self.profile_picture = new_profile_picture
+    elsif remove_profile_picture
+      self.profile_picture.purge
+    end
+  end
+
+  validate if: :new_profile_picture do
+    if new_profile_picture.respond_to?(:content_type)
+      unless new_profile_picture.content_type.in?(ALLOWED_CONTENT_TYPES)
+        errors.add(:new_profile_picture, :invalid_image_type)
+      end
+    else
+      errors.add(:new_profile_picture, :invalid)
+    end
+  end
 
   def votable_for?(entry)
     entry && entry.author != self && !votes.exists?(entry_id: entry.id)
