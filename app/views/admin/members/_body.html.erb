@@ -35,5 +35,14 @@
       <th>管理者</th>
       <td><%= @member.administrator? ? "○" : "－" %></td>
     </tr>
-
+    <tr>
+      <th>役職</th>
+      <td>
+        <% @member.duties.each do |duty| %>
+          <%= duty.name %>
+        <% end %>
+      </td>
+      <td><%= @member.new_duty_ids %></td>
+      <td><%= @member.duty_ids %></td>
+    </tr>
   </table>

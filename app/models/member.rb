@@ -7,6 +7,7 @@ class Member < ApplicationRecord
   has_one_attached :profile_picture
   attribute :new_profile_picture
   attribute :remove_profile_picture, :boolean
+  attribute :new_duty_ids, :intarray, default: []
 
   validates :number, presence: true,
     numericality: {
@@ -39,6 +40,12 @@ class Member < ApplicationRecord
     elsif remove_profile_picture
       self.profile_picture.purge
     end
+
+    self.duty_ids = new_duty_ids
+  end
+
+  after_initialize do |member|
+    self.new_duty_ids.replace(duty_ids)
   end
 
   validate if: :new_profile_picture do
@@ -48,6 +55,15 @@ class Member < ApplicationRecord
       end
     else
       errors.add(:new_profile_picture, :invalid)
+    end
+  end
+
+  validate :new_duty_ids do
+    new_duty_ids.each do |new_id|
+      d = Duty.find(new_id).member_id
+      if !(d == nil || d == self.id )
+        errors.add(:new_duty_ids, :invalid)
+      end
     end
   end
 
