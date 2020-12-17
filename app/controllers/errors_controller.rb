@@ -1,8 +1,8 @@
 class ErrorsController < ActionController::Base
   layout "error"
-  
+
   def show
-    ex= request.env["action_dispatch.exception"]
+    case request.env["action_dispatch.exception"]
     when ActionController::RoutingError
       render "not_found", status: 404, formats: [:html]
     else
