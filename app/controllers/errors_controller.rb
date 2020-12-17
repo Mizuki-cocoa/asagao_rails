@@ -9,5 +9,3 @@ class ErrorsController < ActionController::Base
         render "internal_server_error", status: 500, formats: [:html]
       end
     end
-  end
-  
