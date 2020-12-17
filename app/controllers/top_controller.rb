@@ -5,6 +5,7 @@ class TopController < ApplicationController
   end
 
   def about
+    
   end
 
   def bad_request
